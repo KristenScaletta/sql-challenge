@@ -6,27 +6,24 @@ drop table if exists titles;
 drop table if exists salaries;
 drop table if exists dept_manager;
 
+
 CREATE TABLE "departments" (
-    "DepartmentID" SERIAL,
     "dept_no" int   NOT NULL,
     "dept_name" varchar   NOT NULL,
-   PRIMARY KEY (
+    CONSTRAINT "pk_departments" PRIMARY KEY (
         "dept_no"
      )
 );
 
 CREATE TABLE "dept_emp" (
-    "dept_empID" SERIAL,
     "dept_no" int   NOT NULL,
     "emp_no" int   NOT NULL,
-    PRIMARY KEY (
-        "dept_empID"
-     ),
-	FOREIGN KEY (dept_no) REFERENCES departments(dept_no)
+    CONSTRAINT "pk_dept_emp" PRIMARY KEY (
+        "emp_no"
+     )
 );
 
 CREATE TABLE "employees" (
-    "employeeID" SERIAL,
     "emp_no" int   NOT NULL,
     "emp_title_id" int   NOT NULL,
     "birth_date" varchar   NOT NULL,
@@ -34,38 +31,47 @@ CREATE TABLE "employees" (
     "last_name" varchar   NOT NULL,
     "sex" varchar   NOT NULL,
     "hire_date" varchar   NOT NULL,
-    PRIMARY KEY (
-        "employeeID"
-     ),
-	FOREIGN KEY (emp_no) REFERENCES dept_emp(emp_no)
+    CONSTRAINT "pk_employees" PRIMARY KEY (
+        "emp_no"
+     )
 );
 
 CREATE TABLE "titles" (
-    "titlesID" SERIAL,
     "title_id" int   NOT NULL,
     "title" varchar   NOT NULL,
-    PRIMARY KEY (
-        "titlesID"
-     ),
-	FOREIGN KEY (title_id) REFERENCES employees(emp_title_id)
+    CONSTRAINT "pk_titles" PRIMARY KEY (
+        "title_id"
+     )
 );
 
 CREATE TABLE "salaries" (
-    "salariesID" SERIAL,
     "emp_no" int   NOT NULL,
     "salary" int   NOT NULL,
-    PRIMARY KEY (
-        "salariesID"
-     ),
-	FOREIGN KEY (emp_no) REFERENCES dept_emp(emp_no)
+    CONSTRAINT "pk_salaries" PRIMARY KEY (
+        "emp_no"
+     )
 );
 
 CREATE TABLE "dept_manager" (
-    "managerID" SERIAL,
     "dept_no" int   NOT NULL,
     "emp_no" int   NOT NULL,
-    PRIMARY KEY (
-        "managerID"
-     ),
-	FOREIGN KEY (dept_no) REFERENCES dept_emp(dept_no)
+    CONSTRAINT "pk_dept_manager" PRIMARY KEY (
+        "dept_no"
+     )
 );
+
+ALTER TABLE "dept_emp" ADD CONSTRAINT "fk_dept_emp_dept_no" FOREIGN KEY("dept_no")
+REFERENCES "departments" ("dept_no");
+
+ALTER TABLE "employees" ADD CONSTRAINT "fk_employees_emp_no" FOREIGN KEY("emp_no")
+REFERENCES "dept_emp" ("emp_no");
+
+ALTER TABLE "titles" ADD CONSTRAINT "fk_titles_title_id" FOREIGN KEY("title_id")
+REFERENCES "employees" ("emp_title_id");
+
+ALTER TABLE "salaries" ADD CONSTRAINT "fk_salaries_emp_no" FOREIGN KEY("emp_no")
+REFERENCES "employees" ("emp_no");
+
+ALTER TABLE "dept_manager" ADD CONSTRAINT "fk_dept_manager_dept_no" FOREIGN KEY("dept_no")
+REFERENCES "dept_emp" ("dept_no");
+
