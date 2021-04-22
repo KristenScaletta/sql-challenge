@@ -77,3 +77,10 @@ SELECT employees.emp_no,
 FROM employees
 INNER JOIN salaries ON
 employees.emp_no = salaries.emp_no;
+
+---List first name, last name, and hire date for employees who were hired in 1986.
+SELECT employees.first_name,
+  employees.last_name,
+  employees.hire_date
+FROM employees
+WHERE employees.hire_date BETWEEN '1/1/1986' AND '12/31/1986';
