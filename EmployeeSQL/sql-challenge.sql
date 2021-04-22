@@ -113,3 +113,14 @@ SELECT employees.first_name,
 FROM employees
 WHERE employees.first_name = 'Hercules' AND employees.last_name = '[B]%'
 ORDER BY employees.last_name;
+
+--List all employees in the Sales department, including their employee number, last name, first name, and department name. Need to figure out how to join third table still.
+SELECT dept_emp.dept_no,
+  employees.emp_no,
+  employees.first_name,
+  employees.last_name
+  --departments.dept_name
+FROM employees
+INNER JOIN dept_emp ON
+employees.emp_no = dept_emp.emp_no
+WHERE dept_emp.dept_no = 'd007';
