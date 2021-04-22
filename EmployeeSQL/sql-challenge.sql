@@ -96,3 +96,13 @@ INNER JOIN employees ON
 dept_manager.emp_no = employees.emp_no,
 INNER JOIN departments ON
 dept_manager.dept_no = departments.dept_no;
+
+--department of each employee with: employee number, last name, first name, and department name. Missing dept. Need to figure out (like above) how to join 3 tables.
+SELECT dept_emp.dept_no,
+  employees.emp_no,
+  employees.first_name,
+  employees.last_name
+  --departments.dept_name
+FROM employees
+INNER JOIN dept_emp ON
+employees.emp_no = dept_emp.emp_no;
