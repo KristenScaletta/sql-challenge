@@ -124,3 +124,15 @@ FROM employees
 INNER JOIN dept_emp ON
 employees.emp_no = dept_emp.emp_no
 WHERE dept_emp.dept_no = 'd007';
+
+--List all employees in the Sales and Development departments, including their employee number, last name, first name, and department name. Need to join third table still.
+SELECT dept_emp.dept_no,
+  employees.emp_no,
+  employees.first_name,
+  employees.last_name
+  --departments.dept_name
+FROM employees
+INNER JOIN dept_emp ON
+employees.emp_no = dept_emp.emp_no
+WHERE dept_emp.dept_no = 'd007' OR dept_emp.dept_no = 'd005'
+ORDER BY dept_emp.dept_no;
