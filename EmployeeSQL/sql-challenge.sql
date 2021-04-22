@@ -85,17 +85,16 @@ SELECT employees.first_name,
 FROM employees
 WHERE employees.hire_date BETWEEN '1/1/1986' AND '12/31/1986';
 
---List the manager of each department with: department number, department name, the manager's employee number, last name,first name. This doesn't yet work.
-SELECT dept_manager.emp_no,
-  dept_manager.dept_no,
+--List the manager of each department with: department number, department name, the manager's employee number, last name,first name. This doesn't yet work. Need to connect to departments table as well.
+
+SELECT dept_emp.dept_no,
+  employees.emp_no,
   employees.first_name,
   employees.last_name
-  departments.dept_name,
-FROM dept_manager, departments
-INNER JOIN employees ON
-dept_manager.emp_no = employees.emp_no,
-INNER JOIN departments ON
-dept_manager.dept_no = departments.dept_no;
+  --departments.dept_name
+FROM employees
+INNER JOIN dept_emp ON
+employees.emp_no = dept_emp.emp_no;
 
 --department of each employee with: employee number, last name, first name, and department name. Missing dept. Need to figure out (like above) how to join 3 tables.
 SELECT dept_emp.dept_no,
