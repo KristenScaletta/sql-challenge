@@ -106,7 +106,7 @@ FROM employees
 INNER JOIN dept_emp ON
 employees.emp_no = dept_emp.emp_no;
 
---List first name, last name, and sex for employees whose first name is "Hercules" and last names begin with "B." The last name part doesn't work so this currently returns nothing.
+--List first name, last name, and sex for employees whose first name is "Hercules" and last names begin with "B." Source: https://stackoverflow.com/questions/39457789/check-string-starts-with-specific-letter
 SELECT employees.first_name,
   employees.last_name,
   employees.sex
