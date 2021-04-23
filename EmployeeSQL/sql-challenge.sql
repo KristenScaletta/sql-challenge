@@ -97,15 +97,17 @@ dept_manager.emp_no = employees.emp_no
 INNER JOIN departments ON
 departments.dept_no = dept_manager.dept_no;
 
---department of each employee with: employee number, last name, first name, and department name. Missing dept. Need to figure out (like above) how to join 3 tables.
+--department of each employee with: employee number, last name, first name, and department name.
 SELECT dept_emp.dept_no,
   employees.emp_no,
   employees.first_name,
-  employees.last_name
-  --departments.dept_name
+  employees.last_name,
+  departments.dept_name
 FROM employees
 INNER JOIN dept_emp ON
-employees.emp_no = dept_emp.emp_no;
+employees.emp_no = dept_emp.emp_no
+INNER JOIN departments ON
+departments.dept_no = dept_emp.dept_no;
 
 --List first name, last name, and sex for employees whose first name is "Hercules" and last names begin with "B." Source: https://stackoverflow.com/questions/39457789/check-string-starts-with-specific-letter
 SELECT employees.first_name,
