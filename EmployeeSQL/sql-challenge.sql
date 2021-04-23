@@ -1,4 +1,4 @@
-
+--use to drop tables if needed
 drop table if exists departments;
 drop table if exists dept_emp;
 drop table if exists employees;
@@ -6,7 +6,7 @@ drop table if exists titles;
 drop table if exists salaries;
 drop table if exists dept_manager;
 
-
+--create all tables and keys from csv files
 CREATE TABLE "titles" (
     "title_id" varchar   NOT NULL,
     "title" varchar   NOT NULL,
@@ -130,15 +130,17 @@ INNER JOIN departments ON
 departments.dept_no = dept_emp.dept_no
 WHERE dept_emp.dept_no = 'd007';
 
---List all employees in the Sales and Development departments, including their employee number, last name, first name, and department name. Need to join third table still.
+--List all employees in the Sales and Development departments, including their employee number, last name, first name, and department name.
 SELECT dept_emp.dept_no,
   employees.emp_no,
   employees.first_name,
-  employees.last_name
-  --departments.dept_name
+  employees.last_name,
+  departments.dept_name
 FROM employees
 INNER JOIN dept_emp ON
 employees.emp_no = dept_emp.emp_no
+INNER JOIN departments ON
+departments.dept_no = dept_emp.dept_no
 WHERE dept_emp.dept_no = 'd007' OR dept_emp.dept_no = 'd005'
 ORDER BY dept_emp.dept_no;
 
